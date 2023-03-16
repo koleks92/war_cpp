@@ -5,7 +5,7 @@ It a computer version (console) of an old card game called "War" written in C++.
 
 ## Project status
 
-Begging
+Beggining
 
 ## Instalation
 
