@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <random>
 #include <ctime>
+#include <limits>
 
 /*Card ranks and suits*/
 enum class Ranks
@@ -131,7 +132,7 @@ bool playerPlay()
         char ch{};
         std::cin >> ch;
 
-        if (ch == 'g')
+        if (ch == 'g' || ch == 'G')
         {
             return true;
         }
@@ -145,7 +146,7 @@ bool playAgain()
     char ch;
     std::cout << "Do you want to play again (y/n)? ";
     std::cin >> ch;
-    if (ch == 'y')
+    if (ch == 'y' || ch == 'Y')
     {
         system("clear");
         return true;
@@ -154,6 +155,71 @@ bool playAgain()
     {
         system("clear");
         return false;
+    }
+}
+
+bool fight(Deck& deck)
+{
+    while (true)
+    {
+        system("clear");
+        shuffleDeck(deck);
+        int howMany{};
+        while (true)
+        {
+            std::cout << "How many cards ? (2-8) ";
+            std::cin >> howMany;
+            if (!std::cin)
+            {
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+            }
+            else if (howMany > 8 | howMany < 2)
+            {
+                std::cout << "Number is too big or too small!" << '\n';
+            }
+            else
+            {
+                break;
+            }
+
+        }
+        int playerValue{};
+        int computerValue{};
+
+        std::cout << "Player got: ";
+        for (int i{0}; i < howMany; ++i)
+        {
+            printCard(deck[i]);
+            playerValue += getCardValue(deck[i]);
+            std::cout << " || ";
+        }
+        std::cout << '\n' << "With total value of " << playerValue << '\n';
+
+        std::cout << "Computer got: ";
+        for (int i{25}; i < (howMany + 25); ++i)
+        {
+            printCard(deck[i]);
+            computerValue += getCardValue(deck[i]);
+            std::cout << " || ";
+        }
+        std::cout << '\n' << "With total value of " << computerValue << '\n';
+
+        if (playerValue > computerValue)
+        {
+            std::cout << "Player won 8 points!" << '\n';
+            return true;
+        }
+        else if (computerValue > playerValue)
+        {
+            std::cout << "Computer won 8 points!" << '\n';
+            return false;
+        }
+        else
+        {
+            std::cout << "Tie!" << '\n' << "Let's do it again!" << '\n';
+            continue;
+        }
     }
 }
 
@@ -201,11 +267,26 @@ bool playWar(Deck& deck)
             }
             else
             {
-                std::cout << "Tie !" << '\n';
+                std::cout << "It's a fight !" << '\n' << "Do you dare to fight(y/n) ? ";
+                char ch{};
+                std::cin >> ch;
+                if (ch == 'y' || ch == 'Y')
+                {
+                    if (fight(deck))
+                    {
+                        playerScore += 8;
+                    }
+                    else
+                    {
+                        computerScore += 8;
+                    }
+                }
+                else
+                {
                 std::cout << "Player " << playerScore << " || " << "Computer " << computerScore << '\n';
-
                 ++playerScore;
                 ++computerScore;
+                }
             }
 
             initIndex += 2;
