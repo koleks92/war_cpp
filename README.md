@@ -6,7 +6,6 @@ It a simplified computer version (console) of a game called "War" written in C++
 
 Game working
 TODO:
-    - mini-war mode when ties !
     - debugging !
 
 ## Instalation
