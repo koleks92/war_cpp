@@ -1,11 +1,13 @@
 # WAR
 
-It a computer version (console) of an old card game called "War" written in C++.
-
+It a simplified computer version (console) of a game called "War" written in C++.
 
 ## Project status
 
-Beggining
+Game working
+TODO:
+    - mini-war mode when ties !
+    - debugging !
 
 ## Instalation
 
@@ -14,6 +16,8 @@ Compile main.cpp (compiler standard c++20)
 ## Usage
 
 Follow instructions on the screen.
+Whoever gets higher card rank, wins the war and gets 2 points.
+If ranks are the same, each player gets 1 point.
 Game was made for one player.
 
 ## Other info
