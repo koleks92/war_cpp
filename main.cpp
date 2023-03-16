@@ -73,6 +73,7 @@ using Deck = std::array<Card, 52>;
 using Index = Deck::size_type;
 
 
+
 // Create Deck of 52 cards
 Deck createDeck()
 {
@@ -121,10 +122,69 @@ int getCardValue(const Card& card)
     }
 }
 
+void printDeck(const Deck& deck)
+{
+    for (const auto& card : deck)
+    {
+        printCard(card);
+        std::cout << " "; 
+    }
+}
+
+bool playerPlay()
+{
+    while (true)
+    {
+        char ch{};
+        std::cin >> ch;
+
+        if (ch == 'g')
+        {
+            return true;
+        }
+        return false;
+    }
+}
+
+bool playWar(const Deck& deck)
+{
+    // Split deck // doesnt work !
+    Deck playerDeck{};
+    Deck compDeck{};
+    for (int i{0}, j{26}; i < 26; ++i, ++j)
+    {
+        playerDeck[i] = deck[i];
+        compDeck[i] = deck[j]; 
+    }
+    printDeck(deck);
+    std::cout << '\n';
+    printDeck(playerDeck);
+    std::cout << '\n';
+    printDeck(compDeck);
+
+
+    while (true)
+    {
+
+        std::cout << "Press 'g' to lay your card!";
+        if (playerPlay())
+        {
+            std::cout << "Game on!" << std::endl;
+        }
+        else
+        {
+            std::cout << "Wrong key!" << std::endl;
+        }
+    }
+}
+
 int main()
 {
     auto deck{ createDeck() };
     shuffleDeck(deck);
+
+
+    playWar(deck);
 
     return 0;
 }
