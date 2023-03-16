@@ -113,10 +113,10 @@ int getCardValue(const Card& card)
         case Ranks::rank_8: return 8; break;
         case Ranks::rank_9: return 9; break;
         case Ranks::rank_10: return 10; break;
-        case Ranks::Jack: return 10; break;
-        case Ranks::Queen: return 10; break;
-        case Ranks::King: return 10; break;
-        case Ranks::Ace: return 11; break;
+        case Ranks::Jack: return 11; break;
+        case Ranks::Queen: return 12; break;
+        case Ranks::King: return 13; break;
+        case Ranks::Ace: return 14; break;
         default: return 0;
     }
 }
